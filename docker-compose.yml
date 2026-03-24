@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: movie_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: movie_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./backend
+    container_name: movie_backend
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: movie_db
+      DB_USER: root
+      DB_PASS: root
+      TMDB_API_KEY: ${TMDB_API_KEY}
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: movie_frontend
+    ports:
+      - "80:80"
+      - "5173:80" # Mapping to Vite's usual port just in case
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

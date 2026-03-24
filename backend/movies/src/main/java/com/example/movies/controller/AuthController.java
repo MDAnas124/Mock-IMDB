@@ -26,10 +26,13 @@ public class AuthController {
 
         User user = new User();
         user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword()); // Simple plaintext as requested (mock context)
-        user.setEmail(request.getUsername() + "@example.com"); // Dummy email as it's required in SQL but not in request
+        user.setPassword(request.getPassword());
+        user.setEmail(request.getEmail() != null ? request.getEmail() : request.getUsername() + "@example.com");
+        
         if (request.getRole() != null) {
             user.setRole(request.getRole());
+        } else {
+            user.setRole(com.example.movies.model.Role.user);
         }
 
         userRepository.save(user);

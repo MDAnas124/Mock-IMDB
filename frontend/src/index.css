@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,16 +6,38 @@
 
 @layer base {
   body {
-    @apply bg-background text-textMain font-sans;
+    @apply bg-background text-textMain font-sans antialiased bg-grid-pattern;
+  }
+  
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-surface/80 backdrop-blur-md border border-white/10 shadow-xl;
+    @apply neo-panel;
   }
 
   .btn-primary {
-    @apply bg-primary hover:bg-primaryHover text-white px-4 py-2 rounded-lg font-medium transition-all duration-300;
+    @apply font-head rounded-none outline-none cursor-pointer duration-200 font-bold flex justify-center items-center disabled:opacity-60 disabled:cursor-not-allowed bg-primary text-black border-3 border-black shadow-neo hover:shadow-neo-hover active:shadow-neo-active hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px] transition-all px-6 py-2;
+  }
+
+  .btn-secondary {
+    @apply font-head rounded-none outline-none cursor-pointer duration-200 font-bold flex justify-center items-center disabled:opacity-60 disabled:cursor-not-allowed bg-secondary text-black border-3 border-black shadow-neo hover:shadow-neo-hover active:shadow-neo-active hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px] transition-all px-6 py-2;
+  }
+
+  .neo-panel {
+    @apply bg-surface border-3 border-black shadow-neo;
+  }
+
+  .neo-panel-lg {
+    @apply bg-surface border-3 border-black shadow-neo-lg;
+  }
+
+  .neo-input {
+    @apply px-4 py-2 w-full rounded-none border-3 border-black shadow-neo focus:outline-none focus:shadow-neo-hover focus:translate-x-[2px] focus:translate-y-[2px] transition-all bg-white text-black placeholder:text-textMuted;
   }
 }

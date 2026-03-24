@@ -7,15 +7,30 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0a0a0a',
-        surface: '#171717',
-        primary: '#3b82f6',
-        primaryHover: '#2563eb',
-        textMain: '#f3f4f6',
-        textMuted: '#9ca3af'
+        background: '#FFFFF0',
+        surface: '#FFFFFF',
+        primary: '#FF90E8',
+        primaryHover: '#FF70E0',
+        secondary: '#FFC900',
+        accent: '#23A094',
+        textMain: '#000000',
+        textMuted: '#4B5563',
+        borderMain: '#000000',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Space Grotesk"', 'sans-serif'],
+        head: ['"Space Grotesk"', 'sans-serif'],
+        mono: ['"Courier New"', 'Courier', 'monospace'],
+      },
+      boxShadow: {
+        'neo': '4px 4px 0px 0px rgba(0,0,0,1)',
+        'neo-sm': '2px 2px 0px 0px rgba(0,0,0,1)',
+        'neo-lg': '8px 8px 0px 0px rgba(0,0,0,1)',
+        'neo-hover': '2px 2px 0px 0px rgba(0,0,0,1)',
+        'neo-active': '0px 0px 0px 0px rgba(0,0,0,1)',
+      },
+      borderWidth: {
+        '3': '3px',
       }
     },
   },

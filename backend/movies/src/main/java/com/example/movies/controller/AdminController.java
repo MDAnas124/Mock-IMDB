@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -32,6 +33,27 @@ public class AdminController {
 
         movieRepository.save(movie);
         return ResponseEntity.ok("Movie added manually by Admin");
+    }
+
+    @PutMapping("/movies/{id}")
+    public ResponseEntity<?> updateMovie(@PathVariable Integer id, @RequestBody MovieDTO movieDTO) {
+        Optional<Movie> movieOpt = movieRepository.findById(id);
+        if (movieOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Movie movie = movieOpt.get();
+        movie.setTitle(movieDTO.getTitle());
+        movie.setDescription(movieDTO.getDescription());
+        movie.setReleaseDate(movieDTO.getReleaseDate());
+        movie.setGenre(movieDTO.getGenre());
+        movie.setPosterPath(movieDTO.getPosterPath());
+        movie.setRating(movieDTO.getRating());
+        // Source remains MANUAL for admin edits
+        movie.setCreatedBy(movieDTO.getCreatedBy());
+
+        movieRepository.save(movie);
+        return ResponseEntity.ok("Movie updated successfully");
     }
 
     @GetMapping("/movies")
